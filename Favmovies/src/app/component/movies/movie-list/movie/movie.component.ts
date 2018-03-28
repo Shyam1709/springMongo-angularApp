@@ -17,6 +17,7 @@ export class MovieComponent implements OnInit {
   @Input() index: any;
   @Output() favArray = new EventEmitter();
   @Output() err =new EventEmitter();
+  @Output() update =new EventEmitter();
   public movieUrl=AppConfig.baseUrl;
   public favMovies : any =[];
   public errorMsg ='';
@@ -52,7 +53,6 @@ export class MovieComponent implements OnInit {
       this.favMovies = res;
       this.favArray.emit({
         'favMovies': this.favMovies
-
       });
       this.showError = false;
     },(error:any)=>{
@@ -73,9 +73,10 @@ export class MovieComponent implements OnInit {
 
   // Set Movie details to update
   setMovie(movie) {
-    this.selectedMovie = movie;
+    this.update.emit({
+          'movie': movie
+        })
   }
-  
- 
+   
 
 }

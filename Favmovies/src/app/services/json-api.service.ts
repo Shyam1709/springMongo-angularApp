@@ -9,7 +9,8 @@ export class JsonApiService {
 
   constructor(private http: Http) { 
   }
-private headers = new Headers({ 'Content-Type': 'application/json' });
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+
 // Call rest api to save favourite movie into json database
 addToFavourite(movie){ 
   return this.http.post(AppConfig.apiUrl+'/addMovie', movie, {headers: this.headers})
@@ -19,6 +20,7 @@ addToFavourite(movie){
 
 // Call rest api to update favourite movies data on json database
 updateMovies(movie){ 
+  console.log(movie);
   return this.http.put(AppConfig.apiUrl+'/updateMovie',movie, {headers: this.headers})
   .map(data => data.json(),
     (error: any)=>this.handleError(error));

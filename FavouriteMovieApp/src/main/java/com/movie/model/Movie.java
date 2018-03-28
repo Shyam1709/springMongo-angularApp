@@ -1,12 +1,11 @@
 package com.movie.model;
 
-import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Movie  implements Serializable{
+public class Movie {
 	 @Id
 	    private Integer id;
 	    private String title;
