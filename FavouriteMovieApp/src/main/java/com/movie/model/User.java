@@ -1,4 +1,4 @@
-package com.user.model;
+package com.movie.model;
 
 
 import javax.validation.constraints.NotNull;
@@ -9,23 +9,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document()
 public class User {
-	@NotNull @Size(min=2, max=30) 
 	private String userName;
-	@NotNull @Email
 	private String emailId;
-	@NotNull  @Size(min=6, max=10)
 	private String password;
-	@NotNull  @Size(min=6, max=10)
-	private String confirmPassword;
 
 	public User() {
 
 	}
-	public User(String userName,String emailId, String password, String confirmPassword) {
+	public User(String userName,String emailId, String password) {
 		this.userName=userName;
 		this.emailId=emailId;
 		this.password=password;
-		this.confirmPassword=confirmPassword;
 	}
 
 	public String getUserName() {
@@ -52,12 +46,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 
 }
