@@ -36,13 +36,13 @@ public class UserController {
 	public ResponseEntity<Map<String, String>> add(@RequestBody User user) {
 		Map<String, String> response = new HashMap<String, String>();
 		if (user.getUserName() == null) {
-			response.put("error", "Please Enter valid UserName");
+			response.put("error_userName", "Please Enter valid UserName");
 			return ResponseEntity.badRequest().body(response);
 		} else if (user.getEmailId() == null) {
-			response.put("error", "Please Enter valid EmailId");
+			response.put("error_emailId", "Please Enter valid EmailId");
 			return ResponseEntity.badRequest().body(response);
 		} else if (user.getPassword() == null) {
-			response.put("error", "Please Enter valid Password");
+			response.put("error_password", "Please Enter valid Password");
 			return ResponseEntity.badRequest().body(response);
 		} else {
 			userRepository.save(user);
@@ -60,10 +60,21 @@ public class UserController {
 		if ((userRepository.findOneByEmailId(email) != null) && (userRepository.findOneByPassword(password) != null)) {
 			response.put("ok", "Logedin Succesfuly");
 			return ResponseEntity.accepted().body(response);
-		} else {
-			response.put("error", "LogIn Failed! Please Enter valid Email and Password");
+		}
+		else if ((userRepository.findOneByEmailId(email) == null) && (userRepository.findOneByPassword(password) == null)) {
+			response.put("error_both", "LogIn Failed! Please Enter valid Email and password");
 			return ResponseEntity.badRequest().body(response);
 		}
+		
+		else if(userRepository.findOneByEmailId(email)==null){
+			response.put("error_emailId", "LogIn Failed! Please Enter valid Email");
+			return ResponseEntity.badRequest().body(response);
+		}
+		else {
+			response.put("error_password", "LogIn Failed! Please Enter valid Password");
+			return ResponseEntity.badRequest().body(response);
+		}
+	
 
 	}
 }
